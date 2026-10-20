@@ -64,3 +64,13 @@ classDiagram
     Ticket <|.. Child
     Ticket <|.. FullPrice
 ```
+
+# Business Behaviors
+
+- Schedule a session: Plan a movie screening on a specific media, in a designated room belonging to the Cinema, at a given date and base price. Refuse if the room does not belong to the Cinema
+- Sell a Ticket: Issue an entrance ticket for a session. Refuse if the room is already full
+- Start a session: Launch the screening. Refuse if the room is not READY or format incompatible with the projector or if the DCP key is expired
+- End a session: Conclude the screening. Automatically moves the room to IN_CLEANING and increment counters if Film35mm copies
+- Finish Cleaning: Confirm the room is clean. Move room state to READY. Refuse if the room is not IN_CLEANING
+- Compute remaing seats & occupancy: Real-time metrics computed directly by the session from its room capacity and sold tickets count
+- Compute revenue: Sum of sold tickets prices computed by the sessions and by the cinema of the entire day
