@@ -1,35 +1,49 @@
-## Room
-Create Room -> ID, capacity and its **projector**.
-Can be READY, IN_SESSION or IN_CLEANING.
+# Domain Entities
 
-## Projector
-Create Projector -> 2 possiblity -> Digital or Film
-Must be either Digital or Film
-Link with **Room**
+## Room
+- Attributes : ID, Capacity, **projector**, state(**RoomState**)
+- Rules:
+    - Can only start if **READY** in state
+    - Ending a session automatically transistions the states to **IN_CLEANING**
+    - Transistions back to **READY** only when cleaning is done
+- Enum : **RoomState** (READY, IN_SESSION, IN_CLEANING)
+
+## Projector (Abstract)
+- Attributes : Serial Number(ID)
+- Subtypes: **ProjectorDigital**, **Projector35mm**
 
 ## Movie
-Create Movie -> Title, duration(minutes)
+- Attributes : Title, duration (minutes)
 
-## Media
-Create a Media
-Sent on 2 **media** possible formats -> Digital or 35mm(Film)
-Make link with the **projector** on media and **Movie**
+## Media (Abstract)
+- Reference a **Movie**
+- Subtypes:
+    - **DCP** : Read-only by Digital **Projector**, invalid if screening date > key expiration date
+    - **Film35mm** : Read-only by 35mm **Projector**, invalid if number of projection reaches 50 
 
-## Ticket
-Create a ticket -> 3 types -> Full price, Student or Child.
-Student -> -25% discount
-Child -> 5€ fixed price
+## Ticket (Interface)
+- Compute price based on session base price:
+    - **FullPrice**: 100% of base price
+    - **Student**: 25% discount
+    - **Child**: 5€ fixed price
 
-## Cinema
-Schedule a **session**
-Refuse a room that is not its own.
+## Cinema (Composition)
+- Owns Room and schedule sessions
+- Rules: 
+    - Schedules sessions (reject any room not belonging to Cinema)
+    - Compute total daily revenue
 
 ## Session
-Create a session -> room ID, media, date and the price.
+- Attributes : Room, Media, date, base price, list of tickets
+- Responsabilities:
+    - Validate room avaibility (**RoomState**) and **Media** compability before starting a session
+    - Compute remaining seats, occupancy rate and session revenue
+
+# Class Diagram
 
 ```mermaid
 classDiagram
-    Cinema --* Room
+    Cinema *-- Room
     Cinema --> Session
 
     Room --> Projector
@@ -39,12 +53,12 @@ classDiagram
     Projector <|-- Projector35mm
 
     Media --> Movie
-    Media <|-- MediaDigital
-    Media <|-- Media35mm
+    Media <|-- DCP
+    Media <|-- Film35mm
 
     Session --> Media
     Session --> Room
-    Session --> Tickets
+    Session --> Ticket
     
     Ticket <|.. Student
     Ticket <|.. Child
