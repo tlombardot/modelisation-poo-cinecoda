@@ -1,14 +1,16 @@
 package cine;
 
-public class DCP extends Media {
-    private final String keyExpirationDate;
+import java.time.LocalDate;
 
-    public DCP(Movie movie, String keyExpirationDate) {
+public class DCP extends Media {
+    private final LocalDate keyExpirationDate;
+
+    public DCP(Movie movie, LocalDate keyExpirationDate) {
         super(movie);
         this.keyExpirationDate = keyExpirationDate;
     }
     
-    public String getKeyExpirationDate() {
+    public LocalDate getKeyExpirationDate() {
         return keyExpirationDate;
     }
 }
