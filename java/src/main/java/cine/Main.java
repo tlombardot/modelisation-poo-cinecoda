@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main() {
+    public static void main(String[] args) {
         Logger log = ConsoleLogger.create("cine.scenario");
 
         // Création du cinéma
@@ -42,8 +42,12 @@ public class Main {
         Session sessionDune3 = new Session(room1, dcpDune3, LocalDate.of(2026, 10, 15), 10.00);
         cinema.scheduleSession(sessionDune3);
         sessionDune3.sellTicket(new FullPrice(10.00));
+        sessionDune3.sellTicket(new FullPrice(10.00));
         sessionDune3.sellTicket(new Student(10.00));
         sessionDune3.sellTicket(new Child(10.00));
+        sessionDune3.printSelling();
+
+
 
     }   
         
