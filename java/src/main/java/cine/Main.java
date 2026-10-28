@@ -28,6 +28,8 @@ public class Main {
         log.info("=== 2. Films et supports ===");
         Movie dune3 = new Movie("Dune 3", 166);
         DCP dcpDune3 = new DCP(dune3, LocalDate.of(2026, 10, 30));
+        dcpDune3.printMediaInfo();
+
         }
         
 }
