@@ -2,6 +2,7 @@ package cine;
 
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 public class Main {
     private static Logger log;
@@ -23,6 +24,10 @@ public class Main {
         log.info(() -> "Salles libres : " + cinema.getReadyRooms().stream()
             .map(Room::getName)
             .collect(Collectors.joining(", ")));
+        log.info("");
+        log.info("=== 2. Films et supports ===");
+        Movie dune3 = new Movie("Dune 3", 166);
+        DCP dcpDune3 = new DCP(dune3, LocalDate.of(2026, 10, 30));
         }
         
 }
