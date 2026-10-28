@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         log = ConsoleLogger.create("cine.scenario");
 
-        // Rejouez ici le scénario de l'énoncé, en affichant chaque étape avec log.info(...)
+        // Création du cinéma
         Cinema cinema = new Cinema("CinéCoda");
         log.info("=== 1. Création du cinéma CinéCoda ===");
         ProjectorDigital projectorDigital = new ProjectorDigital("DSQD245SQ");
@@ -25,6 +25,8 @@ public class Main {
             .map(Room::getName)
             .collect(Collectors.joining(", ")));
         log.info("");
+
+        // Création des films et supports
         log.info("=== 2. Films et supports ===");
         Movie dune3 = new Movie("Dune 3", 166);
         DCP dcpDune3 = new DCP(dune3, LocalDate.of(2026, 10, 30));
@@ -32,6 +34,10 @@ public class Main {
         Movie avengersDoomsDay = new Movie("Avengers: Doomsday", 119);
         DCP dcpAvengers = new DCP(avengersDoomsDay, LocalDate.of(2026, 10, 14));
         dcpAvengers.printMediaInfo();
-    }
+        Movie iPlayRockyMovie = new Movie("I Play Rocky", 103);
+        Film35mm iPlayRocky = new Film35mm(iPlayRockyMovie, 49);
+        iPlayRocky.printMediaInfo();
+        log.info("");
+    }   
         
 }
