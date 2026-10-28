@@ -1,5 +1,5 @@
 package cine;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -8,11 +8,11 @@ import java.util.List;
 public class Session {
     private final Room room;
     private final Media media;
-    private final LocalDateTime dateTime;
+    private final LocalDate dateTime;
     private final double basePrice;
     private final List<Ticket> tickets;
 
-    public Session(Room room, Media media, LocalDateTime dateTime, double basePrice) {
+    public Session(Room room, Media media, LocalDate dateTime, double basePrice) {
         this.room = room;
         this.media = media;
         this.dateTime = dateTime;
