@@ -5,10 +5,8 @@ import java.util.stream.Collectors;
 import java.time.LocalDate;
 
 public class Main {
-    private static Logger log;
-
-    public static void main(String[] args) {
-        log = ConsoleLogger.create("cine.scenario");
+    public static void main() {
+        Logger log = ConsoleLogger.create("cine.scenario");
 
         // Création du cinéma
         Cinema cinema = new Cinema("CinéCoda");
@@ -38,6 +36,15 @@ public class Main {
         Film35mm iPlayRocky = new Film35mm(iPlayRockyMovie, 49);
         iPlayRocky.printMediaInfo();
         log.info("");
+
+        // Programmation d'une séance
+        log.info("=== 3. Dune 3 en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
+        Session sessionDune3 = new Session(room1, dcpDune3, LocalDate.of(2026, 10, 15), 10.00);
+        cinema.scheduleSession(sessionDune3);
+        sessionDune3.sellTicket(new FullPrice(10.00));
+        sessionDune3.sellTicket(new Student(10.00));
+        sessionDune3.sellTicket(new Child(10.00));
+
     }   
         
 }

@@ -39,4 +39,8 @@ public class Room{
     public void setState(RoomState state) {
         this.state = state;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
 }

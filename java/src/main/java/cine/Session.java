@@ -20,6 +20,27 @@ public class Session {
         this.tickets = new ArrayList<>();
     }
 
+    public void sellTicket(Ticket ticket) {
+        if(tickets.size() >= room.getCapacity()) {
+            throw new IllegalStateException("No more tickets available for this session");
+        }
+        tickets.add(ticket);
+    }
 
+    public int getRemainingSeats() {
+        return room.getCapacity() - tickets.size();
+    }
+
+    public double getOccupancyRate() {
+        return (double) tickets.size() / room.getCapacity();
+    }
+
+    public double getRevenue() {
+        double revenue = 0.0;
+        for (Ticket ticket : tickets) {
+            revenue += ticket.getPrice(this.basePrice);
+        }
+        return revenue;
+    }
 
 }

@@ -1,5 +1,4 @@
 package cine;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +15,7 @@ public class Cinema {
         this.rooms = new ArrayList<>();
     }
 
-    public void scheduleSessions(Room room, Media media, LocalDate dateTime, double basePrice) {
-        Session session = new Session(room, media, dateTime, basePrice);
+    public void scheduleSession(Session session) {
         sessions.add(session);
     }
 
