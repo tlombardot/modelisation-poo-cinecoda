@@ -1,6 +1,7 @@
 package cine;
 
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class Main {
     private static Logger log;
@@ -19,6 +20,9 @@ public class Main {
         room1.printRoomInfo();
         cinema.addRoom(room2);
         room2.printRoomInfo();
-
-    }  
+        log.info(() -> "Salles libres : " + cinema.getReadyRooms().stream()
+            .map(Room::getName)
+            .collect(Collectors.joining(", ")));
+        }
+        
 }

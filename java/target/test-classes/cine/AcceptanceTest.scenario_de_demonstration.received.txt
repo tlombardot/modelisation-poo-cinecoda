@@ -1,3 +1,5 @@
 === 1. Création du cinéma CinéCoda ===
 Salle 1 : 100 places, projecteur numérique
 Salle 2 : 3 places, projecteur argentique
+Salles libres : Salle 1, Salle 2
+

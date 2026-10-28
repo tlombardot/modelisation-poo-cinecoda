@@ -9,6 +9,7 @@ public class Room{
     private final int capacity;
     private final Projector projectorType;
     private final String name;
+    
     private RoomState state;
     
     public Room(int id,String name, int capacity, Projector projectorType) {
@@ -18,7 +19,7 @@ public class Room{
         this.name = name;
         this.state = RoomState.READY;
     }
-
+    
     public void printRoomInfo() {
         if (projectorType instanceof ProjectorDigital) {
             log.info(() -> String.format("%s : %d places, projecteur numérique", name, capacity));
@@ -26,6 +27,16 @@ public class Room{
             log.info(() -> String.format("%s : %d places, projecteur argentique", name, capacity));
         }
     }
-
     
+    public String getName() {
+        return name;
+    }
+    
+    public RoomState getState() {
+        return state;
+    }
+
+    public void setState(RoomState state) {
+        this.state = state;
+    }
 }

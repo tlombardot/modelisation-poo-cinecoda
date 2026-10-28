@@ -29,9 +29,17 @@ public class Cinema {
         return rooms;
     }
 
+    public List<Room> getReadyRooms() {
+        return rooms.stream()
+                .filter(room -> room.getState() == RoomState.READY)
+                .toList();
+    }
+
     public List<Session> getSessions() {
         return sessions;
     }
+
+
     
 
 }
