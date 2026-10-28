@@ -21,9 +21,16 @@ public class Cinema {
         sessions.add(session);
     }
 
-    public void addRoom(int id, String name, int capacity, Projector projector) {
-        Room room = new Room(id, name, capacity, projector);
+    public void addRoom(Room room) {
         rooms.add(room);
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public List<Session> getSessions() {
+        return sessions;
     }
     
 
