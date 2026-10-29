@@ -7,7 +7,12 @@ public class Child implements Ticket {
     }
     
     @Override
-    public double getPrice(double basePrice) {
+    public String getLabel() {
+        return "enfant";
+    }
+
+    @Override
+    public double getPrice() {
         return 5; // Fixed price of 5€ for children
     }
 }

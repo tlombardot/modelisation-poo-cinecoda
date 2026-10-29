@@ -1,6 +1,6 @@
 package cine;
 
 public interface Ticket {
-    
-    double getPrice(double basePrice);
+    String getLabel();
+    double getPrice();
 }

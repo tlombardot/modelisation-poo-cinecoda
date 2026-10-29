@@ -8,7 +8,12 @@ public class FullPrice implements Ticket {
     }
 
     @Override
-    public double getPrice(double basePrice) {
+    public String getLabel() {
+        return "plein tarif";
+    }
+
+    @Override
+    public double getPrice() {
         return price;
     }
 }
