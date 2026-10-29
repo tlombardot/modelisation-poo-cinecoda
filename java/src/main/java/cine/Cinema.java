@@ -5,22 +5,27 @@ import java.util.List;
 public class Cinema {
 
     private final String name;
+    
     private final List<Session> sessions;
     private final List<Room> rooms;
-
-
+    
+    
     public Cinema(String name) {
         this.name = name;
         this.sessions = new ArrayList<>();
         this.rooms = new ArrayList<>();
     }
-
+    
     public void scheduleSession(Session session) {
         sessions.add(session);
     }
-
+    
     public void addRoom(Room room) {
         rooms.add(room);
+    }
+    
+    public String getName() {
+        return name;
     }
 
     public List<Room> getRooms() {
@@ -40,6 +45,12 @@ public class Cinema {
     public void startSession(Session session) {
         if (sessions.contains(session)) {
             session.start();
+        }
+    }
+
+    public void endSession(Session session) {
+        if (sessions.contains(session)) {
+            session.end();
         }
     }
 

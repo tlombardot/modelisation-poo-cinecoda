@@ -26,7 +26,7 @@ public class Session {
 
     public void sellTicket(Ticket ticket) {
         if(tickets.size() >= room.getCapacity()) {
-            throw new IllegalStateException("No more tickets available for this session");
+            throw new IllegalStateException("Vente refusée : la séance est complète (" + room.getCapacity() + " places)");
         }
         tickets.add(ticket);
     }
@@ -64,6 +64,15 @@ public class Session {
         } else {
             throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
              + " n'est pas libre (état : " + room.getState() + ")");
+        }
+    }
+
+    public void end() {
+        if (room.getState() == RoomState.IN_SESSION) {
+            room.setState(RoomState.IN_CLEANING);
+        } else {
+            throw new IllegalStateException("Fin de séance refusée : la "+ room.getName()
+             + " n'est pas en séance (état : " + room.getState() + ")");
         }
     }
 

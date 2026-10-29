@@ -85,9 +85,23 @@ public class Main {
         cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
         cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
         sessionIPlayRockySalle2.printSelling();
+        try {
+            cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
         sessionIPlayRockySalle2.printSeatRemaining();
         sessionIPlayRockySalle2.printOccupancyRate();
         cinema.startSession(sessionIPlayRockySalle2);
+        log.info("Séance démarrée");
+        cinema.endSession(sessionIPlayRockySalle2);
+        log.info("Séance terminée");
+        if (room2.getState() == RoomState.IN_CLEANING) {
+            log.info("État de la "+ room2.getName() +" : NETTOYAGE");
+        }
+        log.info(() -> "Salles libres : " + cinema.getReadyRooms().stream()
+            .map(Room::getName)
+            .collect(Collectors.joining(", ")));
         log.info("");
 
     }   
