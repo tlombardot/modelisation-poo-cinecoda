@@ -127,4 +127,12 @@ public class Session {
         return room;
     }
 
+    public Media getMedia() {
+        return media;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
 }

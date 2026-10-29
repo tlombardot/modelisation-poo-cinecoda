@@ -136,6 +136,22 @@ public class Main {
         }
         log.info("");
 
+        // Bilan du 15/10/2026
+        log.info("=== 9. Bilan du 15/10/2026 ===");
+        double dailyRevenue = 0.0;
+        for (Session session : cinema.getSessions()) {
+            double revenue = session.getRevenue();
+            dailyRevenue += revenue;
+            log.info(() -> String.format(
+                "%s, %s : %d billet(s), recette %.2f €",
+                session.getMedia().getMovie().getTitle(),
+                session.getRoom().getName(),
+                session.getTickets().size(),
+                revenue));
+        }
+        double finalDailyRevenue = dailyRevenue;
+        log.info(() -> String.format("Recette du jour : %.2f €", finalDailyRevenue));
+
     }   
         
 }
