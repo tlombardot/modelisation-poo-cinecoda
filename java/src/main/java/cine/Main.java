@@ -125,6 +125,16 @@ public class Main {
         }
         log.info("");
 
+        // Programmation en Salle 3
+        log.info("=== 8. Programmation en Salle 3 ===");
+        Room room3 = new Room(3, "Salle 3", 3, projector35mm);
+        Session sessionSalle3 = new Session(room3, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
+        try {
+            cinema.scheduleSession(sessionSalle3);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+        log.info("");
 
     }   
         

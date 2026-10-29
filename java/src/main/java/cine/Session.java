@@ -123,4 +123,8 @@ public class Session {
         log.info(() -> String.format("Taux de remplissage : %.0f %%", getOccupancyRate() * 100));
     }
 
+    public Room getRoom() {
+        return room;
+    }
+
 }

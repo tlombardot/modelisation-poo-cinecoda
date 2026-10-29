@@ -17,6 +17,9 @@ public class Cinema {
     }
     
     public void scheduleSession(Session session) {
+        if (!rooms.contains(session.getRoom())) {
+            throw new IllegalStateException("Programmation refusée : le cinéma CinéCoda n'a pas de " + session.getRoom().getName().toLowerCase());
+        }
         sessions.add(session);
     }
     
