@@ -15,4 +15,7 @@ abstract class Projector {
         return serialNumber;
     }
 
+    public abstract String getType();
+
+    public abstract boolean isDigital();
 }

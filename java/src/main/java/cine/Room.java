@@ -22,11 +22,7 @@ public class Room{
     }
     
     public void printRoomInfo() {
-        if (projectorType instanceof ProjectorDigital) {
-            log.info(() -> String.format("%s : %d places, projecteur numérique", name, capacity));
-        } else if (projectorType instanceof Projector35mm) {
-            log.info(() -> String.format("%s : %d places, projecteur argentique", name, capacity));
-        }
+        log.info(() -> String.format("%s : %d places, projecteur %s", name, capacity, projectorType.getType()));
     }
     
     public String getName() {
@@ -37,8 +33,19 @@ public class Room{
         return state;
     }
     
-    public void setState(RoomState state) {
-        this.state = state;
+    public void startSession() {
+        this.state = RoomState.IN_SESSION;
+    }
+
+    public void endSession() {
+        this.state = RoomState.IN_CLEANING;
+    }
+
+    public void finishCleaning() {
+        if (state != RoomState.IN_CLEANING) {
+            throw new IllegalStateException("Nettoyage refusé : la " + name + " n'est pas en nettoyage");
+        }
+        this.state = RoomState.READY;
     }
     
     public int getCapacity() {
