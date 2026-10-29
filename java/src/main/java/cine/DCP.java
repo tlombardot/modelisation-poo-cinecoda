@@ -24,4 +24,15 @@ public class DCP extends Media {
         return keyExpirationDate;
     }
 
+    @Override
+    public void validateForStart(Projector projector, LocalDate sessionDate) {
+        if (sessionDate.isAfter(keyExpirationDate)) {
+            String expirationDate = keyExpirationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            throw new IllegalStateException("Démarrage refusé : la clé de lecture de « " + getMovie().getTitle()
+                    + " » a expiré le " + expirationDate);
+        }
+        if (!projector.isDigital()) {
+            throw new IllegalStateException("Démarrage refusé : une copie numérique ne peut pas être lue par un projecteur 35 mm");
+        }
+    }
 }

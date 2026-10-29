@@ -1,5 +1,7 @@
 package cine;
 
+import java.time.LocalDate;
+
 abstract class Media {
     private final Movie movie;
 
@@ -9,5 +11,10 @@ abstract class Media {
 
     public Movie getMovie() {
         return movie;
+    }
+
+    public abstract void validateForStart(Projector projector, LocalDate sessionDate);
+
+    public void onSessionEnded() {
     }
 }
