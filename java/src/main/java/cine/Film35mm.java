@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 
 public class Film35mm extends Media {
     private static final Logger log = ConsoleLogger.create("cine.film35mm");
-    private final int numberOfProjections;
+    private int numberOfProjections;
 
 
     public Film35mm(Movie movie, int numberOfProjections) {
@@ -20,5 +20,9 @@ public class Film35mm extends Media {
         log.info(() -> String.format("%s (%d min) : copie 35 mm, %d projections",
                 getMovie().getTitle(), getMovie().getDuration(),
                 numberOfProjections));
+    }
+
+    public void incrementNumberOfProjections() {
+        this.numberOfProjections++;
     }
 }

@@ -35,4 +35,5 @@ Séance démarrée
 Séance terminée
 État de la Salle 2 : NETTOYAGE
 Salles libres : Salle 1
+Projections de la copie de « I Play Rocky » : 50
 

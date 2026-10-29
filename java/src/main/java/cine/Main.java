@@ -102,6 +102,7 @@ public class Main {
         log.info(() -> "Salles libres : " + cinema.getReadyRooms().stream()
             .map(Room::getName)
             .collect(Collectors.joining(", ")));
+        log.info("Projections de la copie de « I Play Rocky » : " + iPlayRocky.getNumberOfProjections());
         log.info("");
 
     }   
