@@ -47,6 +47,26 @@ public class Session {
         return revenue;
     }
 
+    public void start() {
+        if (media instanceof DCP dcp && dateTime.isAfter(dcp.getKeyDate())) {
+            String expirationDate = dcp.getKeyDate().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            throw new IllegalStateException("Démarrage refusé : la clé de lecture de « " + dcp.getMovie().getTitle()
+                    + " » a expiré le " + expirationDate);
+        }
+        if (media instanceof DCP && room.getProjectorType() instanceof Projector35mm) {
+            throw new IllegalStateException("Démarrage refusé : une copie 35 mm ne peut pas être lue par un projecteur numérique");
+        }
+        if (media instanceof Film35mm && room.getProjectorType() instanceof ProjectorDigital) {
+            throw new IllegalStateException("Démarrage refusé : une copie numérique ne peut pas être lue par un projecteur 35 mm");
+        }
+        if (room.getState() == RoomState.READY) {
+            room.setState(RoomState.IN_SESSION);
+        } else {
+            throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
+             + " n'est pas libre (état : " + room.getState() + ")");
+        }
+    }
+
     public void printSelling() {
         for (Ticket ticket : tickets) {
             double price = ticket.getPrice(basePrice);

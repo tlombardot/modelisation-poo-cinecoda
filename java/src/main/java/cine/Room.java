@@ -8,6 +8,7 @@ public class Room{
     private final int id;
     private final int capacity;
     private final Projector projectorType;
+    
     private final String name;
     
     private RoomState state;
@@ -35,12 +36,16 @@ public class Room{
     public RoomState getState() {
         return state;
     }
-
+    
     public void setState(RoomState state) {
         this.state = state;
     }
-
+    
     public int getCapacity() {
         return capacity;
+    }
+    
+    public Projector getProjectorType() {
+        return projectorType;
     }
 }

@@ -16,3 +16,6 @@ Billet enfant vendu : 5,00 €
 Places restantes : 96
 Taux de remplissage : 4 %
 Recette : 32,50 €
+
+=== 4. Avengers: Doomsday en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===
+Démarrage refusé : la clé de lecture de « Avengers: Doomsday » a expiré le 14/10/2026

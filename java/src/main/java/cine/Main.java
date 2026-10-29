@@ -46,8 +46,21 @@ public class Main {
         sessionDune3.sellTicket(new Student(10.00));
         sessionDune3.sellTicket(new Child(10.00));
         sessionDune3.printSelling();
+        log.info("");
 
+        // Démarrage de la séance Avengers: Doomsday
+        log.info("=== 4. Avengers: Doomsday en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
+        Session sessionAvengers = new Session(room1, dcpAvengers, LocalDate.of(2026, 10, 15), 10.00);
+        cinema.scheduleSession(sessionAvengers);
+        try {
+            cinema.startSession(sessionAvengers);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+        log.info("");
 
+        
+        
 
     }   
         

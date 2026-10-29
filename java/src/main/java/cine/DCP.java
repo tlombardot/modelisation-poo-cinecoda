@@ -20,4 +20,8 @@ public class DCP extends Media {
                 keyExpirationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
     }
 
+    public LocalDate getKeyDate() {
+        return keyExpirationDate;
+    }
+
 }

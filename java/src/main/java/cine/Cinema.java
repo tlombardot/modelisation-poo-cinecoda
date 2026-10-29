@@ -37,6 +37,12 @@ public class Cinema {
         return sessions;
     }
 
+    public void startSession(Session session) {
+        if (sessions.contains(session)) {
+            session.start();
+        }
+    }
+
 
     
 
