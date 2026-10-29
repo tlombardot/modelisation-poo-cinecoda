@@ -39,3 +39,6 @@ Projections de la copie de « I Play Rocky » : 50
 
 === 7. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===
 Démarrage refusé : la Salle 2 n'est pas libre (état : NETTOYAGE)
+Nettoyage de la Salle 2 terminé
+Démarrage refusé : la copie 35 mm de « I Play Rocky » est usée (50 projections)
+

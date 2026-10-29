@@ -114,6 +114,17 @@ public class Main {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
+        cinema.cleanRoom(room2);
+        if (room2.getState() == RoomState.READY) {
+            log.info("Nettoyage de la Salle 2 terminé");
+        }
+        try {
+            cinema.startSession(sessionIPlayRockySalle2Again);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+        log.info("");
+
 
     }   
         
