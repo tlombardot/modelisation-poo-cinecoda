@@ -83,9 +83,18 @@ public class Session {
             }
             log.info(() -> String.format("Billet %s vendu : %.2f €", label, price));
         }
+    }
+
+    public void printSeatRemaining() {
         log.info(() -> "Places restantes : " + getRemainingSeats());
-        log.info(() -> String.format("Taux de remplissage : %.0f %%", getOccupancyRate() * 100));
+    }
+    
+    public void printRevenue() {
         log.info(() -> String.format("Recette : %.2f €", getRevenue()));
+    }
+
+    public void printOccupancyRate() {
+        log.info(() -> String.format("Taux de remplissage : %.0f %%", getOccupancyRate() * 100));
     }
 
 }

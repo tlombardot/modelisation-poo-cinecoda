@@ -43,6 +43,12 @@ public class Cinema {
         }
     }
 
+	public void sellTicket(Session session, Ticket ticket) {
+        if (sessions.contains(session)) {
+            session.sellTicket(ticket);
+        }
+    }
+
 
     
 

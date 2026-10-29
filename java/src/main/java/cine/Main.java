@@ -46,6 +46,9 @@ public class Main {
         sessionDune3.sellTicket(new Student(10.00));
         sessionDune3.sellTicket(new Child(10.00));
         sessionDune3.printSelling();
+        sessionDune3.printSeatRemaining();
+        sessionDune3.printOccupancyRate();
+        sessionDune3.printRevenue();
         log.info("");
 
         // Démarrage de la séance Avengers: Doomsday
@@ -72,6 +75,19 @@ public class Main {
         if (room1.getState() == RoomState.READY) {
             log.info("État de la "+ room1.getName() +" : LIBRE");
         }
+        log.info("");
+
+        // Démarrage de la séance I Play Rocky en Salle 2
+        log.info("=== 6. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
+        Session sessionIPlayRockySalle2 = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
+        cinema.scheduleSession(sessionIPlayRockySalle2);
+        cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
+        cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
+        cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
+        sessionIPlayRockySalle2.printSelling();
+        sessionIPlayRockySalle2.printSeatRemaining();
+        sessionIPlayRockySalle2.printOccupancyRate();
+        cinema.startSession(sessionIPlayRockySalle2);
         log.info("");
 
     }   
