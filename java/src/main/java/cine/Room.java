@@ -24,6 +24,10 @@ public class Room{
     public void printRoomInfo() {
         log.info(() -> String.format("%s : %d places, projecteur %s", name, capacity, projectorType.getType()));
     }
+
+    public void printState() {
+        log.info(() -> "État de la " + name + " : " + state.getLabel());
+    }
     
     public String getName() {
         return name;

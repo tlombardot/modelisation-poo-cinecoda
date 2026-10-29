@@ -50,9 +50,8 @@ public class Session {
 
     public void start() {
         if (room.getState() != RoomState.READY) {
-            String motif = (room.getState() == RoomState.IN_CLEANING) ? "NETTOYAGE" : "EN SÉANCE";
             throw new IllegalStateException("Démarrage refusé : la " + room.getName()
-                    + " n'est pas libre (état : " + motif + ")");
+                    + " n'est pas libre (état : " + room.getState().getLabel() + ")");
         }
         media.validateForStart(room.getProjectorType(), dateTime);
         room.startSession();

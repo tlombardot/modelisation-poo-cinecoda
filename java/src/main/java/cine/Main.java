@@ -73,9 +73,7 @@ public class Main {
         } catch (Exception e) {
             log.info(e.getMessage());
         }
-        if (room1.getState() == RoomState.READY) {
-            log.info("État de la "+ room1.getName() +" : LIBRE");
-        }
+        room1.printState();
         log.info("");
 
         // Démarrage de la séance I Play Rocky en Salle 2
@@ -97,9 +95,7 @@ public class Main {
         log.info("Séance démarrée");
         cinema.endSession(sessionIPlayRockySalle2);
         log.info("Séance terminée");
-        if (room2.getState() == RoomState.IN_CLEANING) {
-            log.info("État de la "+ room2.getName() +" : NETTOYAGE");
-        }
+        room2.printState();
         log.info(() -> "Salles libres : " + cinema.getReadyRooms().stream()
             .map(Room::getName)
             .collect(Collectors.joining(", ")));
