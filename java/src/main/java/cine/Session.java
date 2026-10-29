@@ -2,6 +2,7 @@ package cine;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.logging.Logger;
 /**
  * Session
@@ -13,14 +14,12 @@ public class Session {
     private final Room room;
     private final Media media;
     private final LocalDate dateTime;
-    private final double basePrice;
     private final List<Ticket> tickets;
 
-    public Session(Room room, Media media, LocalDate dateTime, double basePrice) {
+    public Session(Room room, Media media, LocalDate dateTime) {
         this.room = room;
         this.media = media;
         this.dateTime = dateTime;
-        this.basePrice = basePrice;
         this.tickets = new ArrayList<>();
     }
 
@@ -42,72 +41,30 @@ public class Session {
     public double getRevenue() {
         double revenue = 0.0;
         for (Ticket ticket : tickets) {
-            revenue += ticket.getPrice(this.basePrice);
+            revenue += ticket.getPrice();
         }
         return revenue;
     }
 
     public void start() {
-        if (room.getState() == RoomState.READY) {
-            validateMediaForStart();
-            room.setState(RoomState.IN_SESSION);
-            if (media instanceof Film35mm film35mm) {
-                film35mm.incrementNumberOfProjections();
-            }
-        } else {
-            if (room.getState() == RoomState.IN_CLEANING) {
-                throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
-             + " n'est pas libre (état : NETTOYAGE)");
-            }
-            if (room.getState() == RoomState.IN_SESSION) {
-                throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
-             + " n'est pas libre (état : EN SÉANCE)");
-            }
+        if (room.getState() != RoomState.READY) {
+            String motif = (room.getState() == RoomState.IN_CLEANING) ? "NETTOYAGE" : "EN SÉANCE";
+            throw new IllegalStateException("Démarrage refusé : la " + room.getName()
+                    + " n'est pas libre (état : " + motif + ")");
         }
-        
-    }
-
-    private void validateMediaForStart() {
-        if (media instanceof DCP dcp && dateTime.isAfter(dcp.getKeyDate())) {
-            String expirationDate = dcp.getKeyDate().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            throw new IllegalStateException("Démarrage refusé : la clé de lecture de « " + dcp.getMovie().getTitle()
-                    + " » a expiré le " + expirationDate);
-        }
-        if (media instanceof DCP && room.getProjectorType() instanceof Projector35mm) {
-            throw new IllegalStateException("Démarrage refusé : une copie numérique ne peut pas être lue par un projecteur 35 mm");
-        }
-        if (media instanceof Film35mm && room.getProjectorType() instanceof ProjectorDigital) {
-            throw new IllegalStateException("Démarrage refusé : une copie 35 mm ne peut pas être lue par un projecteur numérique");
-        }
-        if (media instanceof Film35mm film35mm && film35mm.getNumberOfProjections() >= 50) {
-            throw new IllegalStateException("Démarrage refusé : la copie 35 mm de « " + film35mm.getMovie().getTitle() + " » est usée (" + film35mm.getNumberOfProjections() + " projections)");
-        }
+        media.validateForStart(room.getProjectorType(), dateTime);
+        room.startSession();
     }
 
     public void end() {
-        if (room.getState() == RoomState.IN_SESSION) {
-            room.setState(RoomState.IN_CLEANING);
-        } else {
-            throw new IllegalStateException("Fin de séance refusée : la "+ room.getName()
-             + " n'est pas en séance (état : " + room.getState() + ")");
-        }
+        room.endSession();
+        media.onSessionEnded();
     }
 
     public void printSelling() {
         for (Ticket ticket : tickets) {
-            double price = ticket.getPrice(basePrice);
-            String ticketType = ticket.getClass().getSimpleName().toLowerCase();
-            String label;
-            if (ticketType.contains("student")) {
-                label = "étudiant";
-            } else if (ticketType.contains("child")) {
-                label = "enfant";
-            } else if (price == basePrice) {
-                label = "plein tarif";
-            } else {
-                label = "billet";
-            }
-            log.info(() -> String.format("Billet %s vendu : %.2f €", label, price));
+            double price = ticket.getPrice();
+            log.info(() -> String.format(Locale.FRANCE, "Billet %s vendu : %.2f €", ticket.getLabel(), price));
         }
     }
 
@@ -116,7 +73,7 @@ public class Session {
     }
     
     public void printRevenue() {
-        log.info(() -> String.format("Recette : %.2f €", getRevenue()));
+        log.info(() -> String.format(Locale.FRANCE, "Recette : %.2f €", getRevenue()));
     }
 
     public void printOccupancyRate() {
@@ -133,6 +90,10 @@ public class Session {
 
     public List<Ticket> getTickets() {
         return tickets;
+    }
+
+    public LocalDate getDateTime() {
+        return dateTime;
     }
 
 }

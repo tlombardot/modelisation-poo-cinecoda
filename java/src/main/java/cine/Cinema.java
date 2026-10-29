@@ -64,8 +64,8 @@ public class Cinema {
     }
 
     public void cleanRoom(Room room) {
-        if (rooms.contains(room) && room.getState() == RoomState.IN_CLEANING) {
-            room.setState(RoomState.READY);
+        if (rooms.contains(room)) {
+            room.finishCleaning();
         }
     }
 

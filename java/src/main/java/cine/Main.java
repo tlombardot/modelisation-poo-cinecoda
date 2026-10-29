@@ -3,6 +3,7 @@ package cine;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
+import java.util.Locale;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,7 +40,7 @@ public class Main {
 
         // Programmation d'une séance
         log.info("=== 3. Dune 3 en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
-        Session sessionDune3 = new Session(room1, dcpDune3, LocalDate.of(2026, 10, 15), 10.00);
+        Session sessionDune3 = new Session(room1, dcpDune3, LocalDate.of(2026, 10, 15));
         cinema.scheduleSession(sessionDune3);
         sessionDune3.sellTicket(new FullPrice(10.00));
         sessionDune3.sellTicket(new FullPrice(10.00));
@@ -53,7 +54,7 @@ public class Main {
 
         // Démarrage de la séance Avengers: Doomsday
         log.info("=== 4. Avengers: Doomsday en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
-        Session sessionAvengers = new Session(room1, dcpAvengers, LocalDate.of(2026, 10, 15), 10.00);
+        Session sessionAvengers = new Session(room1, dcpAvengers, LocalDate.of(2026, 10, 15));
         cinema.scheduleSession(sessionAvengers);
         try {
             cinema.startSession(sessionAvengers);
@@ -65,7 +66,7 @@ public class Main {
         // Démarrage de la séance I Play Rocky
         log.info("=== 5. I Play Rocky en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
 
-        Session sessionIPlayRocky = new Session(room1, iPlayRocky, LocalDate.of(2026, 10, 15), 10.00);
+        Session sessionIPlayRocky = new Session(room1, iPlayRocky, LocalDate.of(2026, 10, 15));
         cinema.scheduleSession(sessionIPlayRocky);
         try {
             cinema.startSession(sessionIPlayRocky);
@@ -79,7 +80,7 @@ public class Main {
 
         // Démarrage de la séance I Play Rocky en Salle 2
         log.info("=== 6. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
-        Session sessionIPlayRockySalle2 = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
+        Session sessionIPlayRockySalle2 = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15));
         cinema.scheduleSession(sessionIPlayRockySalle2);
         cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
         cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
@@ -107,7 +108,7 @@ public class Main {
 
         // Démarrage de la séance I Play Rocky en Salle 2
         log.info("=== 7. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
-        Session sessionIPlayRockySalle2Again = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
+        Session sessionIPlayRockySalle2Again = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15));
         cinema.scheduleSession(sessionIPlayRockySalle2Again);
         try {
             cinema.startSession(sessionIPlayRockySalle2Again);
@@ -128,7 +129,7 @@ public class Main {
         // Programmation en Salle 3
         log.info("=== 8. Programmation en Salle 3 ===");
         Room room3 = new Room(3, "Salle 3", 3, projector35mm);
-        Session sessionSalle3 = new Session(room3, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
+        Session sessionSalle3 = new Session(room3, iPlayRocky, LocalDate.of(2026, 10, 15));
         try {
             cinema.scheduleSession(sessionSalle3);
         } catch (Exception e) {
@@ -142,7 +143,7 @@ public class Main {
         for (Session session : cinema.getSessions()) {
             double revenue = session.getRevenue();
             dailyRevenue += revenue;
-            log.info(() -> String.format(
+            log.info(() -> String.format(Locale.FRANCE,
                 "%s, %s : %d billet(s), recette %.2f €",
                 session.getMedia().getMovie().getTitle(),
                 session.getRoom().getName(),
@@ -150,7 +151,7 @@ public class Main {
                 revenue));
         }
         double finalDailyRevenue = dailyRevenue;
-        log.info(() -> String.format("Recette du jour : %.2f €", finalDailyRevenue));
+        log.info(() -> String.format(Locale.FRANCE, "Recette du jour : %.2f €", finalDailyRevenue));
 
     }   
         
