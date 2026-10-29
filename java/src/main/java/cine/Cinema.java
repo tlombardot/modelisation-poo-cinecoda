@@ -1,4 +1,5 @@
 package cine;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +68,16 @@ public class Cinema {
         if (rooms.contains(room)) {
             room.finishCleaning();
         }
+    }
+
+    public double getDailyRevenue(LocalDate date) {
+        double total = 0.0;
+        for (Session session : sessions) {
+            if (session.getDateTime().equals(date)) {
+                total += session.getRevenue();
+            }
+        }
+        return total;
     }
 
 

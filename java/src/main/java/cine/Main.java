@@ -139,10 +139,9 @@ public class Main {
 
         // Bilan du 15/10/2026
         log.info("=== 9. Bilan du 15/10/2026 ===");
-        double dailyRevenue = 0.0;
+        LocalDate day = LocalDate.of(2026, 10, 15);
         for (Session session : cinema.getSessions()) {
             double revenue = session.getRevenue();
-            dailyRevenue += revenue;
             log.info(() -> String.format(Locale.FRANCE,
                 "%s, %s : %d billet(s), recette %.2f €",
                 session.getMedia().getMovie().getTitle(),
@@ -150,8 +149,7 @@ public class Main {
                 session.getTickets().size(),
                 revenue));
         }
-        double finalDailyRevenue = dailyRevenue;
-        log.info(() -> String.format(Locale.FRANCE, "Recette du jour : %.2f €", finalDailyRevenue));
+        log.info(() -> String.format(Locale.FRANCE, "Recette du jour : %.2f €", cinema.getDailyRevenue(day)));
 
     }   
         
