@@ -1,10 +1,9 @@
 package cine;
 
 public class Student implements Ticket {
-    private final double price;
 
-    public Student(double price) {
-        this.price = price;
+    public Student() {
+        //** Constructor for Student ticket */
     }
 
     @Override
@@ -13,7 +12,7 @@ public class Student implements Ticket {
     }
 
     @Override
-    public double getPrice() {
-        return price * 0.75; // 25% discount for students
+    public double getPrice(double basePrice) {
+        return basePrice * 0.75; // 25% discount for students
     }
 }

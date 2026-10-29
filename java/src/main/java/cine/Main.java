@@ -40,12 +40,12 @@ public class Main {
 
         // Programmation d'une séance
         log.info("=== 3. Dune 3 en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
-        Session sessionDune3 = new Session(room1, dcpDune3, LocalDate.of(2026, 10, 15));
+        Session sessionDune3 = new Session(room1, dcpDune3, LocalDate.of(2026, 10, 15), 10.00);
         cinema.scheduleSession(sessionDune3);
-        sessionDune3.sellTicket(new FullPrice(10.00));
-        sessionDune3.sellTicket(new FullPrice(10.00));
-        sessionDune3.sellTicket(new Student(10.00));
-        sessionDune3.sellTicket(new Child(10.00));
+        sessionDune3.sellTicket(new FullPrice());
+        sessionDune3.sellTicket(new FullPrice());
+        sessionDune3.sellTicket(new Student());
+        sessionDune3.sellTicket(new Child());
         sessionDune3.printSelling();
         sessionDune3.printSeatRemaining();
         sessionDune3.printOccupancyRate();
@@ -54,7 +54,7 @@ public class Main {
 
         // Démarrage de la séance Avengers: Doomsday
         log.info("=== 4. Avengers: Doomsday en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
-        Session sessionAvengers = new Session(room1, dcpAvengers, LocalDate.of(2026, 10, 15));
+        Session sessionAvengers = new Session(room1, dcpAvengers, LocalDate.of(2026, 10, 15), 10.00);
         cinema.scheduleSession(sessionAvengers);
         try {
             cinema.startSession(sessionAvengers);
@@ -66,7 +66,7 @@ public class Main {
         // Démarrage de la séance I Play Rocky
         log.info("=== 5. I Play Rocky en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===");
 
-        Session sessionIPlayRocky = new Session(room1, iPlayRocky, LocalDate.of(2026, 10, 15));
+        Session sessionIPlayRocky = new Session(room1, iPlayRocky, LocalDate.of(2026, 10, 15), 10.00);
         cinema.scheduleSession(sessionIPlayRocky);
         try {
             cinema.startSession(sessionIPlayRocky);
@@ -80,14 +80,14 @@ public class Main {
 
         // Démarrage de la séance I Play Rocky en Salle 2
         log.info("=== 6. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
-        Session sessionIPlayRockySalle2 = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15));
+        Session sessionIPlayRockySalle2 = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
         cinema.scheduleSession(sessionIPlayRockySalle2);
-        cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
-        cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
-        cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
+        cinema.sellTicket(sessionIPlayRockySalle2, new Student());
+        cinema.sellTicket(sessionIPlayRockySalle2, new Student());
+        cinema.sellTicket(sessionIPlayRockySalle2, new Student());
         sessionIPlayRockySalle2.printSelling();
         try {
-            cinema.sellTicket(sessionIPlayRockySalle2, new Student(8.00));
+            cinema.sellTicket(sessionIPlayRockySalle2, new Student());
         } catch (Exception e) {
             log.info(e.getMessage());
         }
@@ -108,7 +108,7 @@ public class Main {
 
         // Démarrage de la séance I Play Rocky en Salle 2
         log.info("=== 7. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
-        Session sessionIPlayRockySalle2Again = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15));
+        Session sessionIPlayRockySalle2Again = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
         cinema.scheduleSession(sessionIPlayRockySalle2Again);
         try {
             cinema.startSession(sessionIPlayRockySalle2Again);
@@ -129,7 +129,7 @@ public class Main {
         // Programmation en Salle 3
         log.info("=== 8. Programmation en Salle 3 ===");
         Room room3 = new Room(3, "Salle 3", 3, projector35mm);
-        Session sessionSalle3 = new Session(room3, iPlayRocky, LocalDate.of(2026, 10, 15));
+        Session sessionSalle3 = new Session(room3, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
         try {
             cinema.scheduleSession(sessionSalle3);
         } catch (Exception e) {

@@ -15,11 +15,13 @@ public class Session {
     private final Media media;
     private final LocalDate dateTime;
     private final List<Ticket> tickets;
+    private final double basePrice;
 
-    public Session(Room room, Media media, LocalDate dateTime) {
+    public Session(Room room, Media media, LocalDate dateTime, double basePrice) {
         this.room = room;
         this.media = media;
         this.dateTime = dateTime;
+        this.basePrice = basePrice;
         this.tickets = new ArrayList<>();
     }
 
@@ -41,7 +43,7 @@ public class Session {
     public double getRevenue() {
         double revenue = 0.0;
         for (Ticket ticket : tickets) {
-            revenue += ticket.getPrice();
+            revenue += ticket.getPrice(basePrice);
         }
         return revenue;
     }
@@ -63,7 +65,7 @@ public class Session {
 
     public void printSelling() {
         for (Ticket ticket : tickets) {
-            double price = ticket.getPrice();
+            double price = ticket.getPrice(basePrice);
             log.info(() -> String.format(Locale.FRANCE, "Billet %s vendu : %.2f €", ticket.getLabel(), price));
         }
     }

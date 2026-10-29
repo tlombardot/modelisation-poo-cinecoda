@@ -1,10 +1,9 @@
 package cine;
 
 public class FullPrice implements Ticket {
-    private final double price;
 
-    public FullPrice(double price) {
-        this.price = price;
+    public FullPrice() {
+        //** Constructor for FullPrice ticket */
     }
 
     @Override
@@ -13,7 +12,7 @@ public class FullPrice implements Ticket {
     }
 
     @Override
-    public double getPrice() {
-        return price;
+    public double getPrice(double basePrice) {
+        return basePrice;
     }
 }

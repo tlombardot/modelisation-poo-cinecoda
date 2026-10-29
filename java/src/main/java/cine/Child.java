@@ -2,8 +2,8 @@ package cine;
 
 public class Child implements Ticket {
 
-
-    public Child(double price) {
+    public Child() {
+        //** Constructor for Child ticket */
     }
     
     @Override
@@ -12,7 +12,7 @@ public class Child implements Ticket {
     }
 
     @Override
-    public double getPrice() {
+    public double getPrice(double basePrice) {
         return 5; // Fixed price of 5€ for children
     }
 }
