@@ -54,10 +54,10 @@ public class Session {
                     + " » a expiré le " + expirationDate);
         }
         if (media instanceof DCP && room.getProjectorType() instanceof Projector35mm) {
-            throw new IllegalStateException("Démarrage refusé : une copie 35 mm ne peut pas être lue par un projecteur numérique");
+            throw new IllegalStateException("Démarrage refusé : une copie numérique ne peut pas être lue par un projecteur 35 mm");
         }
         if (media instanceof Film35mm && room.getProjectorType() instanceof ProjectorDigital) {
-            throw new IllegalStateException("Démarrage refusé : une copie numérique ne peut pas être lue par un projecteur 35 mm");
+            throw new IllegalStateException("Démarrage refusé : une copie 35 mm ne peut pas être lue par un projecteur numérique");
         }
         if (room.getState() == RoomState.READY) {
             room.setState(RoomState.IN_SESSION);

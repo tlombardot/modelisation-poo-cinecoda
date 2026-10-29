@@ -19,3 +19,8 @@ Recette : 32,50 €
 
 === 4. Avengers: Doomsday en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===
 Démarrage refusé : la clé de lecture de « Avengers: Doomsday » a expiré le 14/10/2026
+
+=== 5. I Play Rocky en Salle 1 le 15/10/2026 (tarif de base 10,00 €) ===
+Démarrage refusé : une copie 35 mm ne peut pas être lue par un projecteur numérique
+État de la Salle 1 : LIBRE
+
