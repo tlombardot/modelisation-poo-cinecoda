@@ -105,6 +105,16 @@ public class Main {
         log.info("Projections de la copie de « I Play Rocky » : " + iPlayRocky.getNumberOfProjections());
         log.info("");
 
+        // Démarrage de la séance I Play Rocky en Salle 2
+        log.info("=== 7. I Play Rocky en Salle 2 le 15/10/2026 (tarif de base 8,00 €) ===");
+        Session sessionIPlayRockySalle2Again = new Session(room2, iPlayRocky, LocalDate.of(2026, 10, 15), 8.00);
+        cinema.scheduleSession(sessionIPlayRockySalle2Again);
+        try {
+            cinema.startSession(sessionIPlayRockySalle2Again);
+        } catch (Exception e) {
+            log.info(e.getMessage());
+        }
+
     }   
         
 }

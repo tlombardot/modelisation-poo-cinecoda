@@ -48,6 +48,26 @@ public class Session {
     }
 
     public void start() {
+        validateMediaForStart();
+        if (room.getState() == RoomState.READY) {
+            room.setState(RoomState.IN_SESSION);
+            if (media instanceof Film35mm film35mm) {
+                film35mm.incrementNumberOfProjections();
+            }
+        } else {
+            if (room.getState() == RoomState.IN_CLEANING) {
+                throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
+             + " n'est pas libre (état : NETTOYAGE)");
+            }
+            if (room.getState() == RoomState.IN_SESSION) {
+                throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
+             + " n'est pas libre (état : EN SÉANCE)");
+            }
+            
+        }
+    }
+
+    private void validateMediaForStart() {
         if (media instanceof DCP dcp && dateTime.isAfter(dcp.getKeyDate())) {
             String expirationDate = dcp.getKeyDate().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             throw new IllegalStateException("Démarrage refusé : la clé de lecture de « " + dcp.getMovie().getTitle()
@@ -61,15 +81,6 @@ public class Session {
         }
         if (media instanceof Film35mm film35mm && film35mm.getNumberOfProjections() <= 0) {
             throw new IllegalStateException("Démarrage refusé : la copie 35 mm de « " + film35mm.getMovie().getTitle() + " » est ussée (" + film35mm.getNumberOfProjections() + " projections)");
-        }
-        if (room.getState() == RoomState.READY) {
-            room.setState(RoomState.IN_SESSION);
-            if (media instanceof Film35mm film35mm) {
-                film35mm.incrementNumberOfProjections();
-            }
-        } else {
-            throw new IllegalStateException("Démarrage refusé : la "+ room.getName()
-             + " n'est pas libre (état : " + room.getState() + ")");
         }
     }
 
